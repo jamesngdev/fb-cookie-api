@@ -107,8 +107,9 @@ class FacebookService {
           const postData = JSON.parse(
             post.getAttribute('data-ft')
           );
-          const postId = postData.top_level_post_id;
-          const ownerId = postData.content_owner_id_new;
+
+          const postId = postData?.top_level_post_id;
+          const ownerId = postData?.content_owner_id_new;
           return {
             postId,
             ownerId
