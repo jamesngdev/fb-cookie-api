@@ -109,7 +109,7 @@ class FacebookService {
           );
 
           const postId = postData?.top_level_post_id;
-          const ownerId = postData?.content_owner_id_new;
+          const ownerId = (postData?.content_owner_id_new || "").toString();
           return {
             postId,
             ownerId
@@ -165,7 +165,7 @@ class FacebookService {
       }
       return true;
     } catch (error) {
-      return false;
+      return true;
     }
   }
 
@@ -238,9 +238,6 @@ class FacebookService {
     const facebook = new FacebookService(cookie, proxy);
     await facebook.createBrowser();
     const status = await facebook.checkLogin();
-    setTimeout(() => {
-      facebook.checkLogin();
-    }, 10 * 1000);
     return parentPort.postMessage(status);
   }
 
